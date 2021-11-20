@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Properties">
+                <field name="name" string="Property"/>
+                <field name="bedrooms" string="Bedrooms"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="bedrooms"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+-->
+    <record id="withdrawal_view_tree" model="ir.ui.view">
+        <field name="name">withdrawal.tree</field>
+        <field name="model">withdrawal</field>
+        <field name="arch" type="xml">
+            <tree string="Properties">
+                <field name="name"/>
+                <field name="withdrawal_amount"/>
+                <field name="withdrawal_frequency"/>
+                <field name="starting_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="withdrawal_action" model="ir.actions.act_window">
+        <field name="name">Withdrawals</field>
+        <field name="res_model">withdrawal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
