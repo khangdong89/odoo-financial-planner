@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Properties">
+                <field name="name" string="Property"/>
+                <field name="bedrooms" string="Bedrooms"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="bedrooms"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+-->
+    <record id="deposit_view_tree" model="ir.ui.view">
+        <field name="name">deposit.tree</field>
+        <field name="model">deposit</field>
+        <field name="arch" type="xml">
+            <tree string="Properties">
+                <field name="name"/>
+                <field name="initial_principle"/>
+                <field name="regular_deposit"/>
+                <field name="regular_frequency"/>
+                <field name="interest_rate"/>
+                <field name="compound_interest"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="deposit_action" model="ir.actions.act_window">
+        <field name="name">Deposits</field>
+        <field name="res_model">deposit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

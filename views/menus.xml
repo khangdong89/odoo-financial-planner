@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="financial_planner_menu_root" name="Financial Planning">
+        <menuitem id="money_transfer_menu" name="Money Transfers">
+            <menuitem id="deposit_menu_action" action="deposit_action"/>
+            <menuitem id="withdrawal_menu_action" action="withdrawal_action"/>
+        </menuitem>
+        <menuitem id="simulation_menu_action" name="Simulate">
+
+        </menuitem>
+    </menuitem>
+</odoo>
