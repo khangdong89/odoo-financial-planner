@@ -3,30 +3,35 @@ from odoo import models, fields
 
 
 class SimulationTableAction(models.Model):
-    _name = "simulation.table"
-    _description = "Simulation table"
+    _name = "simulation"
+    _description = "Financial simulation object"
 
     name = fields.Char(string="Name", required=True, default="Unnamed Simulation")
     output = fields.Text(string="Result", readonly=True)
 
-    included_deposits = fields.Many2many("deposit", string="Select deposits")
-    included_withdrawals = fields.Many2many("withdrawal", string="Select withdrawals")
+    selected_deposits = fields.Many2many("deposit", string="Deposits")
+    selected_withdrawals = fields.Many2many("withdrawal", string="Withdrawals")
 
-    years_to_simulate = fields.Integer(string="Years to simulate", required=True)
+    years_to_simulate = fields.Integer(string="Length (years)", required=True)
+
+    _sql_constraints = [
+        ('check_positive_years_to_simulate', 'CHECK(years_to_simulate > 0)',
+         'The length (years) must be greater than 0.')
+    ]
 
     def action_simulate(self):
         for record in self:
-            starting_year = datetime.now().year
-            ending_year = starting_year + record.years_to_simulate
+            first_simulation_year = datetime.now().year
+            last_simulation_year = first_simulation_year + record.years_to_simulate
 
-            year_to_amount = {year: 0.0 for year in range(starting_year, ending_year)}
+            year_to_amount = {year: 0.0 for year in range(first_simulation_year, last_simulation_year)}
 
-            for deposit in record.included_deposits:
-                year_to_deposit = self._simulation_deposit(deposit, ending_year)
+            for deposit in record.selected_deposits:
+                year_to_deposit = self._simulation_deposit(deposit, last_simulation_year)
                 year_to_amount = self._merge_dicts_by_addition(year_to_amount, year_to_deposit)
 
-            for withdrawal in record.included_withdrawals:
-                year_to_withdrawal = self._simulation_withdrawal(withdrawal, ending_year)
+            for withdrawal in record.selected_withdrawals:
+                year_to_withdrawal = self._simulation_withdrawal(withdrawal, last_simulation_year)
                 year_to_amount = self._merge_dicts_by_addition(year_to_amount, year_to_withdrawal)
 
             record.output = 'year,\tamount\n' + \
@@ -40,18 +45,18 @@ class SimulationTableAction(models.Model):
             'target': 'self'
         }
 
-    def _simulation_withdrawal(self, withdrawal, ending_year):
-        return self._money_transfer_simulation(withdrawal.starting_date, withdrawal.end_date, ending_year,
+    def _simulation_withdrawal(self, withdrawal, last_simulation_year):
+        return self._money_transfer_simulation(withdrawal.start_date, withdrawal.end_date, last_simulation_year,
                                                0.0, -withdrawal.withdrawal_amount, withdrawal.withdrawal_frequency,
                                                interest_rate=0.0, compound=False)
 
-    def _simulation_deposit(self, deposit, ending_year):
-        return self._money_transfer_simulation(deposit.starting_date, deposit.end_date, ending_year,
+    def _simulation_deposit(self, deposit, last_simulation_year):
+        return self._money_transfer_simulation(deposit.start_date, deposit.end_date, last_simulation_year,
                                                deposit.initial_principle, deposit.regular_deposit,
                                                deposit.regular_frequency, deposit.interest_rate,
                                                deposit.compound_interest)
 
-    def _money_transfer_simulation(self, starting_date, ending_date, ending_year,
+    def _money_transfer_simulation(self, starting_date, ending_date, last_simulation_year,
                                    initial_principle, regular_deposit, frequency,
                                    interest_rate, compound):
         days_to_skip = self._get_days_to_skip(frequency)
@@ -59,7 +64,7 @@ class SimulationTableAction(models.Model):
 
         result = {}
         running_sum = initial_principle
-        while starting_date.year < ending_year:
+        while starting_date.year < last_simulation_year:
             if starting_date < ending_date:
                 running_sum += regular_deposit
                 if compound:

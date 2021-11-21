@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 odoo-financial-planner.access_deposit,access_deposit,odoo-financial-planner.model_deposit,base.group_user,1,1,1,1
 odoo-financial-planner.access_withdrawal,access_withdrawal,odoo-financial-planner.model_withdrawal,base.group_user,1,1,1,1
-odoo-financial-planner.access_simulation_table,access_simulation_table,odoo-financial-planner.model_simulation_table,base.group_user,1,1,1,1
+odoo-financial-planner.access_simulation,access_simulation,odoo-financial-planner.model_simulation,base.group_user,1,1,1,1

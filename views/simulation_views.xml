@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-<!--    <record id="estate_property_view_search" model="ir.ui.view">
-        <field name="name">estate.property.search</field>
-        <field name="model">estate.property</field>
+    <record id="simulation_search" model="ir.ui.view">
+        <field name="name">simulation.search</field>
+        <field name="model">simulation</field>
         <field name="arch" type="xml">
             <search string="Properties">
-                <field name="name" string="Property"/>
-                <field name="bedrooms" string="Bedrooms"/>
+                <field name="name" string="Name"/>
             </search>
         </field>
     </record>
--->
 
     <record id="estate_property_view_form" model="ir.ui.view">
-        <field name="name">simulation.table.form</field>
-        <field name="model">simulation.table</field>
+        <field name="name">simulation.form</field>
+        <field name="model">simulation</field>
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="action_simulate" type="object" string="Simulate!"/>
+                    <button name="action_simulate" type="object" string="Simulate"/>
+                    <button name="action_download" type="object" string="Download Output"/>
                 </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="years_to_simulate"/>
-                        <field name="included_deposits"/>
-                        <field name="included_withdrawals"/>
+                        <field name="selected_deposits"/>
+                        <field name="selected_withdrawals"/>
                     </group>
                     <group name="Output">
-                        <button name="action_download" type="object" string="Download [CSV]"/>
                         <field name="output"/>
                     </group>
                 </sheet>
@@ -37,18 +35,21 @@
     </record>
 
     <record id="simulation_table_tree" model="ir.ui.view">
-        <field name="name">simulation.table.tree</field>
-        <field name="model">simulation.table</field>
+        <field name="name">simulation.tree</field>
+        <field name="model">simulation</field>
         <field name="arch" type="xml">
             <tree string="Properties">
                 <field name="name"/>
+                <field name="years_to_simulate"/>
+                <field name="selected_deposits"/>
+                <field name="selected_withdrawals"/>
             </tree>
         </field>
     </record>
 
     <record id="simulation_table_action" model="ir.actions.act_window">
         <field name="name">Simulations</field>
-        <field name="res_model">simulation.table</field>
+        <field name="res_model">simulation</field>
         <field name="view_mode">tree,form</field>
     </record>
 </odoo>

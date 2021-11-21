@@ -3,6 +3,7 @@
 
 {
     'name': 'Financial Planning',
+    'license': 'LGPL-3',
     'depends': [
         'base'
     ],
@@ -11,7 +12,7 @@
 
         'views/deposit_views.xml',
         'views/withdrawal_views.xml',
-        'views/simulation_table_views.xml',
+        'views/simulation_views.xml',
         'views/menus.xml'
     ]
 }
