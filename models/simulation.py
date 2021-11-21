@@ -33,6 +33,13 @@ class SimulationTableAction(models.Model):
                             '\n'.join(str(key) + ',\t' + "{:.2f}".format(value) for key, value in year_to_amount.items())
         return True
 
+    def action_download(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/csv/download?name=%s&id=%s' % (self.name, self.id),
+            'target': 'self'
+        }
+
     def _simulation_withdrawal(self, withdrawal, ending_year):
         return self._money_transfer_simulation(withdrawal.starting_date, withdrawal.end_date, ending_year,
                                                0.0, -withdrawal.withdrawal_amount, withdrawal.withdrawal_frequency,

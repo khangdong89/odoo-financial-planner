@@ -28,6 +28,7 @@
                         <field name="included_withdrawals"/>
                     </group>
                     <group name="Output">
+                        <button name="action_download" type="object" string="Download [CSV]"/>
                         <field name="output"/>
                     </group>
                 </sheet>
