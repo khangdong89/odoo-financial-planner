@@ -21,7 +21,7 @@ Nachdem die relevanten Anlagen und/oder Entnahmen ausgewählt wurden, kann eine 
 Das Ergebnis der Simulation kann als CSV (*comma-separated values*) heruntergeladen werden.
 
 ## Preview / Vorschau
-TODO: Gif einfügen
+![Preview GIF](preview.gif)
 
 ### Disclaimer / Haftungsauschluss
 *Warning: This module is only for demonstration purposes and learning Odoo module development.
