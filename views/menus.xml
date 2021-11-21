@@ -5,8 +5,7 @@
             <menuitem id="deposit_menu_action" action="deposit_action"/>
             <menuitem id="withdrawal_menu_action" action="withdrawal_action"/>
         </menuitem>
-        <menuitem id="simulation_menu_action" name="Simulate">
 
-        </menuitem>
+        <menuitem id="simulations_menu" action="simulation_table_action" name="Simulations"/>
     </menuitem>
 </odoo>

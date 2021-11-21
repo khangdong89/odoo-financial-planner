@@ -11,6 +11,7 @@
 
         'views/deposit_views.xml',
         'views/withdrawal_views.xml',
+        'views/simulation_table_views.xml',
         'views/menus.xml'
     ]
 }

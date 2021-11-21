@@ -19,6 +19,9 @@ class Deposit(models.Model):
     interest_rate = fields.Float(string='Interest rate (%)', required=True, default=6.0)
     compound_interest = fields.Boolean(string='Compound interest', required=True, default=True)
 
+    starting_date = fields.Date(required=True)
+    end_date = fields.Date(required=True)
+
     _sql_constraints = [
         ('check_unsigned_initial_principle', 'CHECK(initial_principle >= 0.0)',
          'The initial principle should be a positive number.'),
@@ -42,6 +45,7 @@ class Withdrawal(models.Model):
     )
 
     starting_date = fields.Date(required=True)
+    end_date = fields.Date(required=True)
 
     _sql_constraints = [
         ('check_unsigned_withdrawal_amount', 'CHECK(withdrawal_amount >= 0.0)',
